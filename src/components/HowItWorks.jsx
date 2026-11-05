@@ -1,6 +1,5 @@
-import { Package } from 'lucide-react'
 import SectionHeading from './SectionHeading'
-import { MIN_ORDER_QTY, ORDER_STEPS } from '../data/business'
+import { ORDER_STEPS } from '../data/business'
 
 export default function HowItWorks() {
   return (
@@ -25,11 +24,6 @@ export default function HowItWorks() {
             </li>
           ))}
         </ol>
-
-        <p className="moq-note">
-          <Package size={18} aria-hidden="true" />
-          Minimum order quantity: <strong>{MIN_ORDER_QTY} pieces per product</strong>
-        </p>
       </div>
     </section>
   )

@@ -16,14 +16,20 @@ import {
 } from 'lucide-react'
 import WhatsAppIcon from './WhatsAppIcon'
 
-// Data files reference icons by key so they stay free of presentation code.
-export const CATEGORY_ICONS = {
-  'wheels-tyres': Disc3,
-  lighting: Lightbulb,
-  interior: Armchair,
-  exterior: Car,
-  electronics: Radio,
-  care: SprayCan,
+// Categories are managed in the admin, so placeholder icons are chosen by
+// keywords in the category slug/name rather than fixed ids.
+const CATEGORY_ICON_RULES = [
+  [/wheel|tyre|tire|rim/i, Disc3],
+  [/light|lamp|led|bulb/i, Lightbulb],
+  [/interior|seat|mat|steering/i, Armchair],
+  [/electronic|stereo|camera|audio|charger|gps/i, Radio],
+  [/care|clean|polish|wash|detail/i, SprayCan],
+  [/exterior|body|cover|visor|guard/i, Car],
+]
+
+export const getCategoryIcon = (category) => {
+  const key = typeof category === 'string' ? category : `${category?.slug ?? ''} ${category?.name ?? ''}`
+  return CATEGORY_ICON_RULES.find(([pattern]) => pattern.test(key))?.[1] ?? Car
 }
 
 export const FEATURE_ICONS = {
@@ -40,5 +46,3 @@ export const CONTACT_ICONS = {
   address: MapPin,
   hours: Clock,
 }
-
-export const getCategoryIcon = (categoryId) => CATEGORY_ICONS[categoryId] ?? Car

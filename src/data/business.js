@@ -17,9 +17,6 @@ export const BUSINESS = {
   lrNote: 'LR number shared within 24 hours of dispatch',
 }
 
-// Wholesale rule: every line item must be at least this many pieces.
-export const MIN_ORDER_QTY = 50
-
 export const whatsappLink = (message = '') =>
   `https://wa.me/${BUSINESS.whatsappNumber}${message ? `?text=${encodeURIComponent(message)}` : ''}`
 
@@ -31,15 +28,15 @@ export const mailtoLink = (subject = '') =>
    ------------------------------------------------------------------------ */
 
 export const HOME_STATS = [
-  { value: `${MIN_ORDER_QTY}+`, label: 'Minimum order' },
   { value: '24 hrs', label: 'LR update' },
   { value: 'Pan India', label: 'Supply' },
   { value: '24/7', label: 'Availability' },
+  { value: 'Delhi', label: 'Kashmere Gate based' },
 ]
 
 export const ABOUT_STATS = [
-  { value: `${MIN_ORDER_QTY}+`, label: 'Pieces MOQ' },
   { value: '24 hrs', label: 'LR shared' },
+  { value: 'Pan India', label: 'Supply' },
   { value: '24/7', label: 'Open every day' },
   { value: 'Delhi', label: 'Kashmere Gate based' },
 ]
@@ -48,7 +45,7 @@ export const BENEFITS = [
   {
     icon: 'package',
     title: 'Wholesale-first',
-    text: `Built for bulk buyers. Minimum order starts at ${MIN_ORDER_QTY} pieces per product.`,
+    text: 'Built for retailers, workshops and resellers, with clear per-piece pricing on every product.',
   },
   {
     icon: 'layers',
@@ -69,9 +66,9 @@ export const BENEFITS = [
 
 export const ORDER_STEPS = [
   { title: 'Browse', text: 'Explore the automotive range by category or search.' },
-  { title: 'Select', text: `Choose products and the quantity you need — ${MIN_ORDER_QTY} pieces minimum each.` },
+  { title: 'Select', text: 'Choose products and the quantity you need — the total updates as you go.' },
   { title: 'Order', text: 'Add products to your Order List and send it to us on WhatsApp.' },
-  { title: 'Dispatch', text: 'We confirm pricing, dispatch your order and share LR details within 24 hours.' },
+  { title: 'Dispatch', text: 'We confirm your order, dispatch it and share LR details within 24 hours.' },
 ]
 
 export const CONTACT_CHANNELS = [

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Clock, Mail, Menu, Package, Phone, ShoppingCart, Truck, X } from 'lucide-react'
+import { CircleUserRound, Clock, Mail, Menu, Phone, ShoppingCart, Truck, X } from 'lucide-react'
 import logo from '../assets/logo.png'
-import { BUSINESS, MIN_ORDER_QTY } from '../data/business'
+import { BUSINESS } from '../data/business'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
 
 export const NAV_LINKS = [
   { to: '/', label: 'Home', end: true },
@@ -16,7 +17,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { lineCount } = useCart()
+  const { user, isAuthenticated } = useAuth()
   const { pathname } = useLocation()
+  const initial = (user?.name || user?.email || '').trim().charAt(0).toUpperCase()
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => {
@@ -55,9 +58,8 @@ export default function Navbar() {
       <div className="topbar">
         <div className="container topbar__inner">
           <ul className="topbar__notes">
-            <li><Package size={14} aria-hidden="true" /> MOQ {MIN_ORDER_QTY} pcs</li>
             <li><Clock size={14} aria-hidden="true" /> Open 24/7</li>
-            <li className="hide-sm"><Truck size={14} aria-hidden="true" /> LR no. within 24 hrs</li>
+            <li><Truck size={14} aria-hidden="true" /> LR within 24 hrs</li>
           </ul>
           <div className="topbar__contact">
             <a href={BUSINESS.phoneHref} aria-label={`Call ${BUSINESS.phoneDisplay}`} className="topbar__phone">
@@ -92,6 +94,18 @@ export default function Navbar() {
             <a href={BUSINESS.phoneHref} className="btn btn--primary btn--sm navbar__cta">
               <Phone size={16} aria-hidden="true" /> Call for bulk price
             </a>
+            <NavLink
+              to={isAuthenticated ? '/account' : '/signin'}
+              className="navbar__profile"
+              aria-label={isAuthenticated ? `My account (${user.name})` : 'Sign in or create an account'}
+              title={isAuthenticated ? 'My account' : 'Sign in / Sign up'}
+            >
+              {isAuthenticated && initial ? (
+                <span className="navbar__avatar" aria-hidden="true">{initial}</span>
+              ) : (
+                <CircleUserRound size={24} aria-hidden="true" />
+              )}
+            </NavLink>
             <NavLink
               to="/cart"
               className="navbar__cart"
@@ -129,12 +143,17 @@ export default function Navbar() {
               {lineCount > 0 && <span className="navbar__badge navbar__badge--inline">{lineCount}</span>}
             </NavLink>
           </li>
+          <li>
+            <NavLink to={isAuthenticated ? '/account' : '/signin'} className="mobile-menu__link">
+              {isAuthenticated ? 'My account' : 'Sign in / Sign up'}
+            </NavLink>
+          </li>
         </ul>
         <div className="mobile-menu__footer">
           <a href={BUSINESS.phoneHref} className="btn btn--primary btn--block">
             <Phone size={18} aria-hidden="true" /> {BUSINESS.phoneDisplay}
           </a>
-          <p className="mobile-menu__note">Minimum order {MIN_ORDER_QTY} pieces · Open 24/7</p>
+          <p className="mobile-menu__note">Open 24/7 · LR shared within 24 hrs</p>
         </div>
       </div>
       {menuOpen && <div className="mobile-menu__backdrop" onClick={() => setMenuOpen(false)} />}

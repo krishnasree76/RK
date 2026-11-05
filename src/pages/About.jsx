@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader'
 import StatsStrip from '../components/StatsStrip'
 import CtaBanner from '../components/CtaBanner'
 import { FEATURE_ICONS } from '../components/icons'
-import { ABOUT_STATS, BENEFITS, BUSINESS, MIN_ORDER_QTY } from '../data/business'
+import { ABOUT_STATS, BENEFITS, BUSINESS } from '../data/business'
 import usePageMeta from '../hooks/usePageMeta'
 
 const PILLARS = [
@@ -39,8 +39,8 @@ export default function About() {
             </p>
             <p>
               We focus on supplying automotive accessories to businesses and customers who need wholesale
-              quantities — retailers, workshops, resellers and fleet buyers. Every product is available with a
-              minimum order of {MIN_ORDER_QTY} pieces, and pricing is quoted for your required quantity.
+              quantities — retailers, workshops, resellers and fleet buyers. Every product is listed with its
+              price per piece, so you can see your order total before you send it.
             </p>
             <p>
               We're available 24/7, weekdays and weekends, and share the LR number within 24 hours of dispatch so

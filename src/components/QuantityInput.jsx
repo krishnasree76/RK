@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Minus, Plus } from 'lucide-react'
-import { MIN_ORDER_QTY } from '../data/business'
 
-const STEP = 10
-
-// Quantity stepper that never lets the value drop below the wholesale minimum.
-// Typing is free-form; the value is clamped when the field loses focus.
-export default function QuantityInput({ value, onChange, id, label = 'Quantity' }) {
+// Quantity stepper that never goes below the product's minimum (1 when the
+// product has no minimum order). Typing is free-form; the value is clamped
+// when the field loses focus.
+export default function QuantityInput({ value, onChange, min = 1, max, step = 1, id, label = 'Quantity' }) {
   const [draft, setDraft] = useState(String(value))
 
   useEffect(() => {
@@ -14,7 +12,8 @@ export default function QuantityInput({ value, onChange, id, label = 'Quantity' 
   }, [value])
 
   const commit = (next) => {
-    const n = Math.max(MIN_ORDER_QTY, Math.floor(Number(next)) || MIN_ORDER_QTY)
+    let n = Math.max(min, Math.floor(Number(next)) || min)
+    if (max !== undefined && max >= min) n = Math.min(n, max)
     setDraft(String(n))
     if (n !== value) onChange(n)
   }
@@ -24,9 +23,9 @@ export default function QuantityInput({ value, onChange, id, label = 'Quantity' 
       <button
         type="button"
         className="qty__btn"
-        onClick={() => commit(value - STEP)}
-        disabled={value <= MIN_ORDER_QTY}
-        aria-label={`Decrease by ${STEP}`}
+        onClick={() => commit(value - step)}
+        disabled={value <= min}
+        aria-label={`Decrease by ${step}`}
       >
         <Minus size={16} />
       </button>
@@ -35,7 +34,8 @@ export default function QuantityInput({ value, onChange, id, label = 'Quantity' 
         className="qty__input"
         type="number"
         inputMode="numeric"
-        min={MIN_ORDER_QTY}
+        min={min}
+        max={max !== undefined && max >= min ? max : undefined}
         step={1}
         value={draft}
         aria-label={label}
@@ -43,7 +43,13 @@ export default function QuantityInput({ value, onChange, id, label = 'Quantity' 
         onBlur={(e) => commit(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && e.currentTarget.blur()}
       />
-      <button type="button" className="qty__btn" onClick={() => commit(value + STEP)} aria-label={`Increase by ${STEP}`}>
+      <button
+        type="button"
+        className="qty__btn"
+        onClick={() => commit(value + step)}
+        disabled={max !== undefined && value >= max}
+        aria-label={`Increase by ${step}`}
+      >
         <Plus size={16} />
       </button>
     </div>

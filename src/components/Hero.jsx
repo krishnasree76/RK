@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { BUSINESS, MIN_ORDER_QTY } from '../data/business'
+import { BUSINESS } from '../data/business'
 import './Hero.css'
 
 // Served from /public so the browser can stream the video instead of bundling it.
 const HERO_VIDEO = `${import.meta.env.BASE_URL}assets/hero-video.mp4`
 const HERO_POSTER = `${import.meta.env.BASE_URL}assets/hero-poster.jpg`
 
-const HIGHLIGHTS = [`MOQ ${MIN_ORDER_QTY} pcs`, 'LR within 24 hrs', 'Pan-India supply']
+const HIGHLIGHTS = ['LR within 24 hrs', 'Pan-India supply', 'Open 24/7']
 
 export default function Hero() {
   const sectionRef = useRef(null)

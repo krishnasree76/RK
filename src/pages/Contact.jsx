@@ -1,9 +1,9 @@
-import { Clock, Package, Phone, Truck } from 'lucide-react'
+import { Clock, Phone, Truck } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import ContactCards from '../components/ContactCards'
 import ContactForm from '../components/ContactForm'
 import WhatsAppIcon from '../components/WhatsAppIcon'
-import { BUSINESS, MIN_ORDER_QTY, whatsappLink } from '../data/business'
+import { BUSINESS, whatsappLink } from '../data/business'
 import usePageMeta from '../hooks/usePageMeta'
 
 export default function Contact() {
@@ -29,7 +29,7 @@ export default function Contact() {
               <span className="eyebrow">Enquiry form</span>
               <h2 className="enquiry__title">Send us your requirement</h2>
               <p className="enquiry__intro">
-                Tell us the products and quantities you need. Minimum order is {MIN_ORDER_QTY} pieces per product.
+                Tell us the products and quantities you need and we'll get back to you.
               </p>
               <ContactForm />
             </div>
@@ -49,7 +49,6 @@ export default function Contact() {
                 <Phone size={18} aria-hidden="true" /> {BUSINESS.phoneDisplay}
               </a>
               <ul className="enquiry__facts">
-                <li><Package size={16} aria-hidden="true" /> MOQ {MIN_ORDER_QTY} pieces per product</li>
                 <li><Truck size={16} aria-hidden="true" /> {BUSINESS.lrNote}</li>
                 <li><Clock size={16} aria-hidden="true" /> {BUSINESS.hours}</li>
               </ul>

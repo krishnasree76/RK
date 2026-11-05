@@ -8,12 +8,12 @@ import HowItWorks from '../components/HowItWorks'
 import CtaBanner from '../components/CtaBanner'
 import ContactSection from '../components/ContactSection'
 import usePageMeta from '../hooks/usePageMeta'
-import { HOME_STATS, MIN_ORDER_QTY } from '../data/business'
+import { HOME_STATS } from '../data/business'
 
 export default function Home() {
   usePageMeta(
     'RK ENTERPRICES DELHI | Wholesale Car Accessories',
-    `Wholesale supplier of all types of car accessories from Kashmere Gate, Delhi. Minimum order ${MIN_ORDER_QTY} pieces, LR shared within 24 hours, open 24/7.`,
+    'Wholesale supplier of all types of car accessories from Kashmere Gate, Delhi. LR shared within 24 hours, open 24/7.',
   )
 
   return (

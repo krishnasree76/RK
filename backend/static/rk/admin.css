@@ -1,0 +1,69 @@
+/* RK ENTERPRICES DELHI — Unfold admin refinements (light theme).
+   Colours come from UNFOLD["COLORS"]; this file adds brand details, readability
+   safeguards and styles for our own thumbnail markup. Selectors start with
+   html:not(.dark) because Unfold loads this file before its own stylesheet. */
+
+:root {
+  --rk-red: #e10600;
+  --rk-text: oklch(22% 0 0);
+  --rk-text-muted: oklch(42% 0 0);
+}
+
+/* Fixed light theme: stop browser "auto dark mode" / force-dark from
+   lightening text while the backgrounds stay white. */
+html:not(.dark) {
+  color-scheme: only light;
+}
+
+/* Readable defaults for any text that inherits its colour. */
+html:not(.dark) body {
+  color: var(--rk-text);
+  background-color: oklch(97% 0 0);
+}
+
+html:not(.dark) body ::placeholder {
+  color: var(--rk-text-muted);
+  opacity: 1;
+}
+
+html:not(.dark) body input,
+html:not(.dark) body textarea,
+html:not(.dark) body select {
+  color: var(--rk-text);
+}
+
+/* Thin brand accent along the top of every admin page. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rk-red) 0 30%, #151515 30% 32%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Change-list thumbnails */
+.rk-thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 42px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  vertical-align: middle;
+}
+
+.rk-thumb--empty {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  color: #4a4a4a;
+  background: repeating-linear-gradient(135deg, #f5f5f5 0 6px, #ececec 6px 12px);
+}

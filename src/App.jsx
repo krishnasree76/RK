@@ -9,6 +9,9 @@ import ProductDetails from './pages/ProductDetails'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
+import SignIn from './pages/SignIn'
+import Account from './pages/Account'
+import RequireAuth from './components/RequireAuth'
 import usePageMeta from './hooks/usePageMeta'
 
 // Reset scroll on route change (ignores query-string-only changes like category filters).
@@ -47,6 +50,15 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route
+            path="/account"
+            element={
+              <RequireAuth>
+                <Account />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

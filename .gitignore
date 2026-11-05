@@ -2,3 +2,10 @@ node_modules
 dist
 *.local
 .DS_Store
+
+# Environment files with real values
+.env
+.env.production
+
+# Python cache (backend has its own .gitignore)
+__pycache__/

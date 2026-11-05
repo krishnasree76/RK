@@ -2,16 +2,13 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { getCategoryIcon } from './icons'
 
-// Editorial category tile. `variant` controls its size in the homepage grid.
-export default function CategoryCard({ category, index, variant = 'medium' }) {
-  const Icon = getCategoryIcon(category.id)
+// Editorial category tile. `layoutClass` sets its size in the homepage grid.
+export default function CategoryCard({ category, index, layoutClass = '' }) {
+  const Icon = getCategoryIcon(category)
   const number = String(index + 1).padStart(2, '0')
 
   return (
-    <Link
-      to={`/products?category=${category.id}`}
-      className={`category-card category-card--${variant} category-card--${category.id}`}
-    >
+    <Link to={`/products?category=${encodeURIComponent(category.slug)}`} className={`category-card ${layoutClass}`}>
       <div className="category-card__media" aria-hidden="true">
         {category.image ? (
           <img src={category.image} alt="" loading="lazy" decoding="async" />
@@ -28,7 +25,7 @@ export default function CategoryCard({ category, index, variant = 'medium' }) {
 
       <div className="category-card__body">
         <h3 className="category-card__title">{category.name}</h3>
-        <p className="category-card__tagline">{category.tagline}</p>
+        {category.tagline && <p className="category-card__tagline">{category.tagline}</p>}
         <span className="category-card__count">
           {category.productCount} product{category.productCount === 1 ? '' : 's'}
         </span>

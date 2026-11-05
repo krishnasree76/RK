@@ -130,7 +130,7 @@ export default function ContactForm() {
             name="message"
             rows={5}
             className="field__input field__input--textarea"
-            placeholder="Products, quantities (minimum 50 pcs each) and delivery city"
+            placeholder="Products, quantities and delivery city"
             value={values.message}
             onChange={update}
             required
